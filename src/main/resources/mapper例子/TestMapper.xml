@@ -1,0 +1,644 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hp.gdcc.tsportal.mapper.AlertMapper">
+	<resultMap id="BaseResultMap" type="com.hp.gdcc.tsportal.model.Alert">
+		<id column="ALERT_ID" property="alertId" jdbcType="DECIMAL" />
+		<result column="EVENT_ID" property="eventId" jdbcType="DECIMAL" />
+		<result column="SRC_EVENT_ID" property="srcEventId" jdbcType="VARCHAR" />
+		<result column="ALERT_CODE" property="alertCode" jdbcType="DECIMAL" />
+		<result column="NODE_ID" property="nodeId" jdbcType="DECIMAL" />
+		<result column="DOMAINS" property="domains" jdbcType="VARCHAR" />
+		<result column="NODE_TYPES" property="nodeTypes" jdbcType="VARCHAR" />
+		<result column="DEV_NAME" property="devName" jdbcType="VARCHAR" />
+		<result column="APP_NAME" property="appName" jdbcType="VARCHAR" />
+		<result column="RELATED_NODE_ID" property="relatedNodeId"
+			jdbcType="DECIMAL" />
+		<result column="INSTANCE" property="instance" jdbcType="VARCHAR" />
+		<result column="INSTANCE2" property="instance2" jdbcType="VARCHAR" />
+		<result column="KPI_VALUE" property="kpiValue" jdbcType="VARCHAR" />
+		<result column="KPI_CODE" property="kpiCode" jdbcType="DECIMAL" />
+		<result column="KPI_UNIT" property="kpiUnit" jdbcType="VARCHAR" />
+		<result column="SEVERITY" property="severity" jdbcType="DECIMAL" />
+		<result column="TITLE" property="title" jdbcType="VARCHAR" />
+		<result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+		<result column="ARISING_TIME" property="arisingTime" jdbcType="TIMESTAMP" />
+		<result column="RECEIVE_TIME" property="receiveTime" jdbcType="TIMESTAMP" />
+		<result column="AGENT_ID" property="agentId" jdbcType="VARCHAR" />
+		<result column="FILTERED" property="filtered" jdbcType="DECIMAL" />
+		<result column="COUNT" property="count" jdbcType="DECIMAL" />
+		<result column="STATE" property="state" jdbcType="DECIMAL" />
+		<result column="CAUSE_ALERT_ID" property="causeAlertId"
+			jdbcType="DECIMAL" />
+		<result column="RELATED" property="related" jdbcType="DECIMAL" />
+		<result column="FIRST_ARISING_TIME" property="firstArisingTime"
+			jdbcType="TIMESTAMP" />
+		<result column="OLD_SEVERITY" property="oldSeverity" jdbcType="DECIMAL" />
+		<result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+		<result column="OPEN_TIME" property="openTime" jdbcType="TIMESTAMP" />
+		<result column="CLOSE_TIME" property="closeTime" jdbcType="TIMESTAMP" />
+		<result column="OPEN_BY" property="openBy" jdbcType="VARCHAR" />
+		<result column="CLOSE_BY" property="closeBy" jdbcType="VARCHAR" />
+		<result column="OWNER" property="owner" jdbcType="VARCHAR" />
+		<result column="ORDER_ID" property="orderId" jdbcType="VARCHAR" />
+		<result column="ORDER_STATUS" property="orderStatus" jdbcType="VARCHAR" />
+		<result column="COMMENTS" property="comments" jdbcType="VARCHAR" />
+		<result column="INCIDENT_ID" property="incidentId" jdbcType="DECIMAL" />
+		<result column="TAGS" property="tags" jdbcType="VARCHAR" />
+		<result column="CLAIM_TIME" property="claimTime" jdbcType="TIMESTAMP" />
+		<result column="CLAIM_BY" property="claimBy" jdbcType="VARCHAR" />
+		<result column="UPGRADE_TIME" property="upgradeTime" jdbcType="TIMESTAMP" />
+		<result column="UPGRADE_COUNT" property="upgradeCount"
+			jdbcType="DECIMAL" />
+		<result column="ACTIVE_STATE" property="activeState" jdbcType="DECIMAL" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ALERT_ID, EVENT_ID, SRC_EVENT_ID, ALERT_CODE, NODE_ID, DOMAINS, NODE_TYPES,
+		DEV_NAME,
+		APP_NAME, RELATED_NODE_ID, INSTANCE, INSTANCE2, KPI_VALUE, KPI_CODE, KPI_UNIT,
+		SEVERITY,
+		TITLE, MESSAGE, ARISING_TIME, RECEIVE_TIME, (case when AGENT_ID is null then 'OTHER' else AGENT_ID end) as AGENT_ID, FILTERED, COUNT,
+		STATE, CAUSE_ALERT_ID,
+		RELATED, FIRST_ARISING_TIME, OLD_SEVERITY, UPDATE_TIME, OPEN_TIME, CLOSE_TIME,
+		OPEN_BY,
+		CLOSE_BY, OWNER, ORDER_ID, ORDER_STATUS, COMMENTS, INCIDENT_ID, TAGS,
+		CLAIM_TIME,
+		CLAIM_BY, UPGRADE_TIME, UPGRADE_COUNT, ACTIVE_STATE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.math.BigDecimal">
+		select
+		<include refid="Base_Column_List" />
+		from T_ALERT
+		where ALERT_ID = #{alertId,jdbcType=DECIMAL}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal">
+		delete from T_ALERT
+		where ALERT_ID = #{alertId,jdbcType=DECIMAL}
+	</delete>
+	<insert id="insert" parameterType="com.hp.gdcc.tsportal.model.Alert">
+		insert into T_ALERT (ALERT_ID, EVENT_ID, SRC_EVENT_ID,
+		ALERT_CODE, NODE_ID, DOMAINS,
+		NODE_TYPES, DEV_NAME, APP_NAME,
+		RELATED_NODE_ID, INSTANCE, INSTANCE2,
+		KPI_VALUE, KPI_CODE, KPI_UNIT,
+		SEVERITY, TITLE, MESSAGE,
+		ARISING_TIME, RECEIVE_TIME, AGENT_ID,
+		FILTERED, COUNT, STATE,
+		CAUSE_ALERT_ID, RELATED, FIRST_ARISING_TIME,
+		OLD_SEVERITY, UPDATE_TIME, OPEN_TIME,
+		CLOSE_TIME, OPEN_BY, CLOSE_BY,
+		OWNER, ORDER_ID, ORDER_STATUS,
+		COMMENTS, INCIDENT_ID, TAGS,
+		CLAIM_TIME, CLAIM_BY, UPGRADE_TIME,
+		UPGRADE_COUNT, ACTIVE_STATE)
+		values (#{alertId,jdbcType=DECIMAL}, #{eventId,jdbcType=DECIMAL},
+		#{srcEventId,jdbcType=VARCHAR},
+		#{alertCode,jdbcType=DECIMAL}, #{nodeId,jdbcType=DECIMAL}, #{domains,jdbcType=VARCHAR},
+		#{nodeTypes,jdbcType=VARCHAR}, #{devName,jdbcType=VARCHAR},
+		#{appName,jdbcType=VARCHAR},
+		#{relatedNodeId,jdbcType=DECIMAL}, #{instance,jdbcType=VARCHAR}, #{instance2,jdbcType=VARCHAR},
+		#{kpiValue,jdbcType=VARCHAR}, #{kpiCode,jdbcType=DECIMAL},
+		#{kpiUnit,jdbcType=VARCHAR},
+		#{severity,jdbcType=DECIMAL}, #{title,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR},
+		#{arisingTime,jdbcType=TIMESTAMP}, #{receiveTime,jdbcType=TIMESTAMP},
+		#{agentId,jdbcType=VARCHAR},
+		#{filtered,jdbcType=DECIMAL}, #{count,jdbcType=DECIMAL}, #{state,jdbcType=DECIMAL},
+		#{causeAlertId,jdbcType=DECIMAL}, #{related,jdbcType=DECIMAL},
+		#{firstArisingTime,jdbcType=TIMESTAMP},
+		#{oldSeverity,jdbcType=DECIMAL}, #{updateTime,jdbcType=TIMESTAMP},
+		#{openTime,jdbcType=TIMESTAMP},
+		#{closeTime,jdbcType=TIMESTAMP}, #{openBy,jdbcType=VARCHAR}, #{closeBy,jdbcType=VARCHAR},
+		#{owner,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR},
+		#{orderStatus,jdbcType=VARCHAR},
+		#{comments,jdbcType=VARCHAR}, #{incidentId,jdbcType=DECIMAL}, #{tags,jdbcType=VARCHAR},
+		#{claimTime,jdbcType=TIMESTAMP}, #{claimBy,jdbcType=VARCHAR},
+		#{upgradeTime,jdbcType=TIMESTAMP},
+		#{upgradeCount,jdbcType=DECIMAL}, #{activeState,jdbcType=DECIMAL})
+	</insert>
+	<insert id="insertSelective" parameterType="com.hp.gdcc.tsportal.model.Alert">
+		insert into T_ALERT
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="alertId != null">
+				ALERT_ID,
+			</if>
+			<if test="eventId != null">
+				EVENT_ID,
+			</if>
+			<if test="srcEventId != null">
+				SRC_EVENT_ID,
+			</if>
+			<if test="alertCode != null">
+				ALERT_CODE,
+			</if>
+			<if test="nodeId != null">
+				NODE_ID,
+			</if>
+			<if test="domains != null">
+				DOMAINS,
+			</if>
+			<if test="nodeTypes != null">
+				NODE_TYPES,
+			</if>
+			<if test="devName != null">
+				DEV_NAME,
+			</if>
+			<if test="appName != null">
+				APP_NAME,
+			</if>
+			<if test="relatedNodeId != null">
+				RELATED_NODE_ID,
+			</if>
+			<if test="instance != null">
+				INSTANCE,
+			</if>
+			<if test="instance2 != null">
+				INSTANCE2,
+			</if>
+			<if test="kpiValue != null">
+				KPI_VALUE,
+			</if>
+			<if test="kpiCode != null">
+				KPI_CODE,
+			</if>
+			<if test="kpiUnit != null">
+				KPI_UNIT,
+			</if>
+			<if test="severity != null">
+				SEVERITY,
+			</if>
+			<if test="title != null">
+				TITLE,
+			</if>
+			<if test="message != null">
+				MESSAGE,
+			</if>
+			<if test="arisingTime != null">
+				ARISING_TIME,
+			</if>
+			<if test="receiveTime != null">
+				RECEIVE_TIME,
+			</if>
+			<if test="agentId != null">
+				AGENT_ID,
+			</if>
+			<if test="filtered != null">
+				FILTERED,
+			</if>
+			<if test="count != null">
+				COUNT,
+			</if>
+			<if test="state != null">
+				STATE,
+			</if>
+			<if test="causeAlertId != null">
+				CAUSE_ALERT_ID,
+			</if>
+			<if test="related != null">
+				RELATED,
+			</if>
+			<if test="firstArisingTime != null">
+				FIRST_ARISING_TIME,
+			</if>
+			<if test="oldSeverity != null">
+				OLD_SEVERITY,
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME,
+			</if>
+			<if test="openTime != null">
+				OPEN_TIME,
+			</if>
+			<if test="closeTime != null">
+				CLOSE_TIME,
+			</if>
+			<if test="openBy != null">
+				OPEN_BY,
+			</if>
+			<if test="closeBy != null">
+				CLOSE_BY,
+			</if>
+			<if test="owner != null">
+				OWNER,
+			</if>
+			<if test="orderId != null">
+				ORDER_ID,
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS,
+			</if>
+			<if test="comments != null">
+				COMMENTS,
+			</if>
+			<if test="incidentId != null">
+				INCIDENT_ID,
+			</if>
+			<if test="tags != null">
+				TAGS,
+			</if>
+			<if test="claimTime != null">
+				CLAIM_TIME,
+			</if>
+			<if test="claimBy != null">
+				CLAIM_BY,
+			</if>
+			<if test="upgradeTime != null">
+				UPGRADE_TIME,
+			</if>
+			<if test="upgradeCount != null">
+				UPGRADE_COUNT,
+			</if>
+			<if test="activeState != null">
+				ACTIVE_STATE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="alertId != null">
+				#{alertId,jdbcType=DECIMAL},
+			</if>
+			<if test="eventId != null">
+				#{eventId,jdbcType=DECIMAL},
+			</if>
+			<if test="srcEventId != null">
+				#{srcEventId,jdbcType=VARCHAR},
+			</if>
+			<if test="alertCode != null">
+				#{alertCode,jdbcType=DECIMAL},
+			</if>
+			<if test="nodeId != null">
+				#{nodeId,jdbcType=DECIMAL},
+			</if>
+			<if test="domains != null">
+				#{domains,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeTypes != null">
+				#{nodeTypes,jdbcType=VARCHAR},
+			</if>
+			<if test="devName != null">
+				#{devName,jdbcType=VARCHAR},
+			</if>
+			<if test="appName != null">
+				#{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="relatedNodeId != null">
+				#{relatedNodeId,jdbcType=DECIMAL},
+			</if>
+			<if test="instance != null">
+				#{instance,jdbcType=VARCHAR},
+			</if>
+			<if test="instance2 != null">
+				#{instance2,jdbcType=VARCHAR},
+			</if>
+			<if test="kpiValue != null">
+				#{kpiValue,jdbcType=VARCHAR},
+			</if>
+			<if test="kpiCode != null">
+				#{kpiCode,jdbcType=DECIMAL},
+			</if>
+			<if test="kpiUnit != null">
+				#{kpiUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="severity != null">
+				#{severity,jdbcType=DECIMAL},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="message != null">
+				#{message,jdbcType=VARCHAR},
+			</if>
+			<if test="arisingTime != null">
+				#{arisingTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receiveTime != null">
+				#{receiveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="agentId != null">
+				#{agentId,jdbcType=VARCHAR},
+			</if>
+			<if test="filtered != null">
+				#{filtered,jdbcType=DECIMAL},
+			</if>
+			<if test="count != null">
+				#{count,jdbcType=DECIMAL},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=DECIMAL},
+			</if>
+			<if test="causeAlertId != null">
+				#{causeAlertId,jdbcType=DECIMAL},
+			</if>
+			<if test="related != null">
+				#{related,jdbcType=DECIMAL},
+			</if>
+			<if test="firstArisingTime != null">
+				#{firstArisingTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="oldSeverity != null">
+				#{oldSeverity,jdbcType=DECIMAL},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openTime != null">
+				#{openTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="closeTime != null">
+				#{closeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openBy != null">
+				#{openBy,jdbcType=VARCHAR},
+			</if>
+			<if test="closeBy != null">
+				#{closeBy,jdbcType=VARCHAR},
+			</if>
+			<if test="owner != null">
+				#{owner,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId != null">
+				#{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				#{orderStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="comments != null">
+				#{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="incidentId != null">
+				#{incidentId,jdbcType=DECIMAL},
+			</if>
+			<if test="tags != null">
+				#{tags,jdbcType=VARCHAR},
+			</if>
+			<if test="claimTime != null">
+				#{claimTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="claimBy != null">
+				#{claimBy,jdbcType=VARCHAR},
+			</if>
+			<if test="upgradeTime != null">
+				#{upgradeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="upgradeCount != null">
+				#{upgradeCount,jdbcType=DECIMAL},
+			</if>
+			<if test="activeState != null">
+				#{activeState,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.hp.gdcc.tsportal.model.Alert">
+		update T_ALERT
+		<set>
+			<if test="eventId != null">
+				EVENT_ID = #{eventId,jdbcType=DECIMAL},
+			</if>
+			<if test="srcEventId != null">
+				SRC_EVENT_ID = #{srcEventId,jdbcType=VARCHAR},
+			</if>
+			<if test="alertCode != null">
+				ALERT_CODE = #{alertCode,jdbcType=DECIMAL},
+			</if>
+			<if test="nodeId != null">
+				NODE_ID = #{nodeId,jdbcType=DECIMAL},
+			</if>
+			<if test="domains != null">
+				DOMAINS = #{domains,jdbcType=VARCHAR},
+			</if>
+			<if test="nodeTypes != null">
+				NODE_TYPES = #{nodeTypes,jdbcType=VARCHAR},
+			</if>
+			<if test="devName != null">
+				DEV_NAME = #{devName,jdbcType=VARCHAR},
+			</if>
+			<if test="appName != null">
+				APP_NAME = #{appName,jdbcType=VARCHAR},
+			</if>
+			<if test="relatedNodeId != null">
+				RELATED_NODE_ID = #{relatedNodeId,jdbcType=DECIMAL},
+			</if>
+			<if test="instance != null">
+				INSTANCE = #{instance,jdbcType=VARCHAR},
+			</if>
+			<if test="instance2 != null">
+				INSTANCE2 = #{instance2,jdbcType=VARCHAR},
+			</if>
+			<if test="kpiValue != null">
+				KPI_VALUE = #{kpiValue,jdbcType=VARCHAR},
+			</if>
+			<if test="kpiCode != null">
+				KPI_CODE = #{kpiCode,jdbcType=DECIMAL},
+			</if>
+			<if test="kpiUnit != null">
+				KPI_UNIT = #{kpiUnit,jdbcType=VARCHAR},
+			</if>
+			<if test="severity != null">
+				SEVERITY = #{severity,jdbcType=DECIMAL},
+			</if>
+			<if test="title != null">
+				TITLE = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="message != null">
+				MESSAGE = #{message,jdbcType=VARCHAR},
+			</if>
+			<if test="arisingTime != null">
+				ARISING_TIME = #{arisingTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="receiveTime != null">
+				RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="agentId != null">
+				AGENT_ID = #{agentId,jdbcType=VARCHAR},
+			</if>
+			<if test="filtered != null">
+				FILTERED = #{filtered,jdbcType=DECIMAL},
+			</if>
+			<if test="count != null">
+				COUNT = #{count,jdbcType=DECIMAL},
+			</if>
+			<if test="state != null">
+				STATE = #{state,jdbcType=DECIMAL},
+			</if>
+			<if test="causeAlertId != null">
+				CAUSE_ALERT_ID = #{causeAlertId,jdbcType=DECIMAL},
+			</if>
+			<if test="related != null">
+				RELATED = #{related,jdbcType=DECIMAL},
+			</if>
+			<if test="firstArisingTime != null">
+				FIRST_ARISING_TIME = #{firstArisingTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="oldSeverity != null">
+				OLD_SEVERITY = #{oldSeverity,jdbcType=DECIMAL},
+			</if>
+			<if test="updateTime != null">
+				UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openTime != null">
+				OPEN_TIME = #{openTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="closeTime != null">
+				CLOSE_TIME = #{closeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="openBy != null">
+				OPEN_BY = #{openBy,jdbcType=VARCHAR},
+			</if>
+			<if test="closeBy != null">
+				CLOSE_BY = #{closeBy,jdbcType=VARCHAR},
+			</if>
+			<if test="owner != null">
+				OWNER = #{owner,jdbcType=VARCHAR},
+			</if>
+			<if test="orderId != null">
+				ORDER_ID = #{orderId,jdbcType=VARCHAR},
+			</if>
+			<if test="orderStatus != null">
+				ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+			</if>
+			<if test="comments != null">
+				COMMENTS = #{comments,jdbcType=VARCHAR},
+			</if>
+			<if test="incidentId != null">
+				INCIDENT_ID = #{incidentId,jdbcType=DECIMAL},
+			</if>
+			<if test="tags != null">
+				TAGS = #{tags,jdbcType=VARCHAR},
+			</if>
+			<if test="claimTime != null">
+				CLAIM_TIME = #{claimTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="claimBy != null">
+				CLAIM_BY = #{claimBy,jdbcType=VARCHAR},
+			</if>
+			<if test="upgradeTime != null">
+				UPGRADE_TIME = #{upgradeTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="upgradeCount != null">
+				UPGRADE_COUNT = #{upgradeCount,jdbcType=DECIMAL},
+			</if>
+			<if test="activeState != null">
+				ACTIVE_STATE = #{activeState,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where ALERT_ID = #{alertId,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.hp.gdcc.tsportal.model.Alert">
+		update T_ALERT
+		set EVENT_ID = #{eventId,jdbcType=DECIMAL},
+		SRC_EVENT_ID = #{srcEventId,jdbcType=VARCHAR},
+		ALERT_CODE = #{alertCode,jdbcType=DECIMAL},
+		NODE_ID = #{nodeId,jdbcType=DECIMAL},
+		DOMAINS = #{domains,jdbcType=VARCHAR},
+		NODE_TYPES = #{nodeTypes,jdbcType=VARCHAR},
+		DEV_NAME = #{devName,jdbcType=VARCHAR},
+		APP_NAME = #{appName,jdbcType=VARCHAR},
+		RELATED_NODE_ID = #{relatedNodeId,jdbcType=DECIMAL},
+		INSTANCE = #{instance,jdbcType=VARCHAR},
+		INSTANCE2 = #{instance2,jdbcType=VARCHAR},
+		KPI_VALUE = #{kpiValue,jdbcType=VARCHAR},
+		KPI_CODE = #{kpiCode,jdbcType=DECIMAL},
+		KPI_UNIT = #{kpiUnit,jdbcType=VARCHAR},
+		SEVERITY = #{severity,jdbcType=DECIMAL},
+		TITLE = #{title,jdbcType=VARCHAR},
+		MESSAGE = #{message,jdbcType=VARCHAR},
+		ARISING_TIME = #{arisingTime,jdbcType=TIMESTAMP},
+		RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
+		AGENT_ID = #{agentId,jdbcType=VARCHAR},
+		FILTERED = #{filtered,jdbcType=DECIMAL},
+		COUNT = #{count,jdbcType=DECIMAL},
+		STATE = #{state,jdbcType=DECIMAL},
+		CAUSE_ALERT_ID = #{causeAlertId,jdbcType=DECIMAL},
+		RELATED = #{related,jdbcType=DECIMAL},
+		FIRST_ARISING_TIME = #{firstArisingTime,jdbcType=TIMESTAMP},
+		OLD_SEVERITY = #{oldSeverity,jdbcType=DECIMAL},
+		UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+		OPEN_TIME = #{openTime,jdbcType=TIMESTAMP},
+		CLOSE_TIME = #{closeTime,jdbcType=TIMESTAMP},
+		OPEN_BY = #{openBy,jdbcType=VARCHAR},
+		CLOSE_BY = #{closeBy,jdbcType=VARCHAR},
+		OWNER = #{owner,jdbcType=VARCHAR},
+		ORDER_ID = #{orderId,jdbcType=VARCHAR},
+		ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+		COMMENTS = #{comments,jdbcType=VARCHAR},
+		INCIDENT_ID = #{incidentId,jdbcType=DECIMAL},
+		TAGS = #{tags,jdbcType=VARCHAR},
+		CLAIM_TIME = #{claimTime,jdbcType=TIMESTAMP},
+		CLAIM_BY = #{claimBy,jdbcType=VARCHAR},
+		UPGRADE_TIME = #{upgradeTime,jdbcType=TIMESTAMP},
+		UPGRADE_COUNT = #{upgradeCount,jdbcType=DECIMAL},
+		ACTIVE_STATE = #{activeState,jdbcType=DECIMAL}
+		where ALERT_ID = #{alertId,jdbcType=DECIMAL}
+	</update>
+
+	<select id="findPageAlertList" parameterType="Page" resultMap="BaseResultMap">
+		select * from (
+			select <include refid="Base_Column_List" /> from t_alert t1,
+			(select rowid from t_alert where 1=1
+				<if test="paramsObject.select != null and paramsObject.select != ''">
+					and (
+					dev_name like #{paramsObject.select} || '%'
+					or
+					app_name like #{paramsObject.select} || '%'
+					or
+					regexp_like(message, replace(#{paramsObject.select}, '.' ,'\.'),'i')
+					)
+				</if>
+				<if test="paramsObject.status != null and paramsObject.status != ''">
+					and 
+					<choose>
+						<when test="paramsObject.status == 0"> state = 0 </when>
+						<when test="paramsObject.status == 1"> severity = 3 </when>
+					</choose> 
+				</if>
+				<if test="paramsObject.timePart != null and paramsObject.timePart != ''">
+					and arising_time
+					<choose>
+						<when test="paramsObject.timePart == 0"> >= sysdate - 0.5/24 </when>
+						<when test="paramsObject.timePart == 1"> >= sysdate - 1/24 </when>
+						<when test="paramsObject.timePart == 2"> >= sysdate - 2/24 </when>
+					</choose> 
+					and arising_time <![CDATA[<]]> sysdate
+				</if>
+				<if test="paramsObject.timePart == null or paramsObject.timePart == ''">
+				 	and arising_time >= trunc(sysdate) and arising_time <![CDATA[<]]> trunc(sysdate) + 1
+				</if>
+			) t2 where t1.rowid = t2.rowid
+		) t
+		<if test="paramsObject.agentIds != null">
+			<foreach collection="paramsObject.agentIds" index="index"
+				open="where agent_id in(" separator="," close=")">
+				#{paramsObject.agentIds[${index}]}
+			</foreach>
+		</if>
+		<if test="order != null and order != ''">
+			order by ${order}
+		</if>
+	</select>
+
+	<select id="findAlertAgentIdGroup" resultType="String">
+		select (case when agent_id is null then 'OTHER' else agent_id end) as agent_id from (select agent_id from t_alert
+		where arising_time >= trunc(sysdate) and arising_time <![CDATA[<]]> trunc(sysdate) + 1
+		group by agent_id
+		) t
+	</select>
+
+	<select id="indexCount" resultType="Map">
+		select 'top' as "group", count(0) as "all",count(case when state = 0 then 1 end) as "wait",count(case when severity = 3 then 1 end) as "major" from t_alert
+		where arising_time >= trunc(sysdate) and arising_time <![CDATA[<]]> trunc(sysdate) + 1
+		union all
+		select agent_id as "group", count(0) as "all", count(case when state = 0 then 1 end) as "wait", 0 as "major" from t_alert
+		where arising_time >= trunc(sysdate) and arising_time <![CDATA[<]]> trunc(sysdate) + 1
+		group by agent_id
+	</select>
+
+	<select id="newCount" resultType="Map">
+		select 'alert' as "type", to_char(trunc(sysdate),'yyyymmdd') as "date", count(0) as "count" from t_alert 
+		where arising_time >= trunc(sysdate) and arising_time <![CDATA[<]]> trunc(sysdate) + 1
+		union
+		select 'alertEvent' as "type", to_char(trunc(sysdate),'yyyymmdd') as "date", count(0) as "count" from t_alert_event 
+		where arising_time >= trunc(sysdate) and arising_time <![CDATA[<]]> trunc(sysdate) + 1
+	</select>
+	
+	<select id="count" resultType="Integer">
+		select count(0) as "count" from t_alert 
+	</select>
+</mapper>

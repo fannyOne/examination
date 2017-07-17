@@ -1,0 +1,27 @@
+mapper目录为mybatis的xml文件映射路径，一个model对应这个mapper文件
+
+jsp路径：src/main/webapp/WEB-INF/view
+
+静态文件资源路径：src/main/webapp/static
+
+mapper：com.hp.gdcc.tsportal.mapper
+
+service：com.hp.gdcc.tsportal.service
+
+controller：com.hp.gdcc.tsportal.web.controller
+
+启动项目后测试链接以下链接：
+http://127.0.0.1:8080/
+http://127.0.0.1:8080/test?id=1
+
+
+以下为创建测试表语句：
+DROP TABLE IF EXISTS `test`;
+
+CREATE TABLE `test` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+INSERT INTO `test` VALUES ('1', '测试数据');

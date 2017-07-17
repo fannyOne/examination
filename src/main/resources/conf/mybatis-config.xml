@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 命名空间 -->
+	<typeAliases>
+		<typeAlias type="com.hp.gdcc.tsportal.common.pager.Page" alias="Page" />
+		<package name="com.hp.gdcc.tsportal.model" />
+	</typeAliases>
+
+	<plugins>
+		<plugin interceptor="com.hp.gdcc.tsportal.common.pager.PageInterceptor">
+			<property name="databaseType" value="mysql" />
+		</plugin>
+	</plugins>
+
+	<!-- 映射map -->
+	<mappers>
+	</mappers>
+</configuration>
